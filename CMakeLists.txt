@@ -1,16 +1,35 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 2.6)
 PROJECT(CommandBridge CXX)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+
+SET(CMAKE_INSTALL_PREFIX /usr/local/cmdbr)
+SET(CMAKE_INSTALL_RPATH /usr/local/cmdbr/bin)
 
 SET(OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)
 SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 
-LINK_DIRECTORIES(/home/fifilyu/workspace/libs)
-INCLUDE_DIRECTORIES("include" /home/fifilyu/workspace/includes)
+INCLUDE_DIRECTORIES("include")
 
 ADD_EXECUTABLE(cmdbr-server src/server.cxx src/common.cxx src/zlog.cxx)
-TARGET_LINK_LIBRARIES(cmdbr-server zmq)
 
 ADD_EXECUTABLE(cmdbr-cli src/client.cxx src/common.cxx src/zlog.cxx)
-TARGET_LINK_LIBRARIES(cmdbr-cli zmq)
+
+FIND_PACKAGE(ZMQ REQUIRED)
+FIND_PACKAGE(CPPZMQ REQUIRED)
+
+IF(ZMQ_FOUND)
+    INCLUDE_DIRECTORIES(${ZMQ_INCLUDE_DIRS})
+    TARGET_LINK_LIBRARIES(cmdbr-server ${ZMQ_LIBRARIES})
+    TARGET_LINK_LIBRARIES(cmdbr-cli ${ZMQ_LIBRARIES})
+ENDIF()
+
+IF(CPPZMQ_FOUND)
+    INCLUDE_DIRECTORIES(${CPPZMQ_INCLUDE_DIRS})
+ENDIF()
+
+INSTALL(TARGETS cmdbr-server cmdbr-cli
+    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
+)
