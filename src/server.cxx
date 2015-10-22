@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <unistd.h>
 #include <iostream>
+#include <signal.h>
 
 void usage() {
     std::cerr
@@ -92,6 +93,9 @@ int main(int argc, char* argv[]) {
             zmq::message_t request;
 
             const std::string arg_(zmq_recv(socket));
+
+            // 父进程自动忽略子进程的状态，防止出现僵死的子进程
+            signal (SIGCHLD, SIG_IGN);
 
             int pid = fork();
 
