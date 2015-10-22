@@ -12,7 +12,7 @@
 
 static const std::string VERSION("v1.0.0");
 
-// IP地址、*、127.0.0.1 或者 0.0.0.0
+// IP地址、127.0.0.1 或者 0.0.0.0
 static const std::string HOST("127.0.0.1");
 
 static const std::string PORT("44357");
@@ -23,7 +23,7 @@ static const std::string LOG_FILE("C:\\Windows\\temp\\cmdbr-server.log");
 static const std::string LOG_FILE("/var/log/cmdbr-server.log");
 #endif
 
-static const std::string S_PACKAGE("ctserver");
+static const std::string S_PACKAGE("cmdbr-server");
 
 static const std::string S_DESC("命令桥服务端");
 
