@@ -1,4 +1,4 @@
-﻿/*
+/*
  * zlog.cxx
  *
  *  Created on: 2014年9月30日
