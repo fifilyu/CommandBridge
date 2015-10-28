@@ -21,13 +21,13 @@ void usage() {
             "\t" << S_PACKAGE << " -l [IP地址[localhost]] -c <命令>\n"
             "\t" << S_PACKAGE << " -l [IP地址[localhost]] -p [端口[44357]] -c <命令>\n"
             "\t" << S_PACKAGE << " -f -l [IP地址[localhost]] -p [端口[44357]] -c <命令>\n"
-            "\t" << S_PACKAGE << " -v\n\n"
+            "\t" << S_PACKAGE << " -h\n\n"
             "参数 :\n"
             "\t" << S_PACKAGE << " -c <命令>\t\t触发的命令行\n"
             "\t" << S_PACKAGE << " -f <前台执行>\t强制使用非守护方式运行\n"
             "\t" << S_PACKAGE << " -l [IP地址]\t绑定的主机IP地址\n"
             "\t" << S_PACKAGE << " -p [端口]\t\t绑定的主机端口\n"
-            "\t" << S_PACKAGE << " -v <显示帮助信息>\t显示帮助信息\n"
+            "\t" << S_PACKAGE << " -h <显示帮助信息>\t显示帮助信息\n"
         << std::endl;
 }
 int main(int argc, char* argv[]) {
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
                              "f"
                              "l:"
                              "p:"
-                             "v"  // help
+                             "h"  // help
     ))) {
         switch (c) {
             case 'c':
@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
             case 'p':
                 p_port_ = std::string(optarg);
                 break;
-            case 'v':
+            case 'h':
                 usage();
                 return EXIT_SUCCESS;
             default:
