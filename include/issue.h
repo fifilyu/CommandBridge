@@ -10,7 +10,7 @@
 
 #include <string>
 
-static const std::string VERSION("v1.0.1");
+static const std::string VERSION("v1.0.3");
 
 // IP地址、127.0.0.1 或者 0.0.0.0
 static const std::string HOST("127.0.0.1");
