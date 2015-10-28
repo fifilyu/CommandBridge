@@ -87,15 +87,16 @@ bool creat_daemon(const std::string &name, const bool to_null) {
         return false;
     }
 
-    if (!crt_pid_file(getpid(), pid_file_)) {
-        print_log(LOG_ERROR, "Cannot create pid file '%s'.", pid_file_.c_str());
-        return false;
-    }
-
     const int noclose_(to_null ? 0 : 1);
 
     if (daemon(0, noclose_) != 0) {
         print_log(LOG_ERROR, "Cannot run %s in the background as system daemons.", name.c_str());
+        return false;
+    }
+
+    // 在执行daemon函数之后获取的pid才是实际的子进程pid
+    if (!crt_pid_file(getpid(), pid_file_)) {
+        print_log(LOG_ERROR, "Cannot create pid file '%s'.", pid_file_.c_str());
         return false;
     }
 
