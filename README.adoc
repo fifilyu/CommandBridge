@@ -12,8 +12,7 @@
 ====
 
 == 平台
-* 支持Linux系统
-* 暂不支持Windows，但有开发计划
+* 仅支持Linux系统
 
 == 安装
 请先安装 `make` 、`cmake` 、 `git` 、`g++` 、`libsodium` 以及 `zeromq` 。
